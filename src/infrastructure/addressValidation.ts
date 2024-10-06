@@ -1,4 +1,3 @@
-// src/application/addressValidation.ts
 import axios from 'axios';
 
 const PARIS_LAT = 48.8566; // Latitude of Paris

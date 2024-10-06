@@ -1,4 +1,3 @@
-// pages/api/users/[id].ts
 import { NextApiRequest, NextApiResponse } from 'next';
 
 const users = new Map<string, any>();
@@ -16,7 +15,7 @@ export default async function handler(req: NextApiRequest, res: NextApiResponse)
     } else if (req.method === 'POST') {
         const { firstName, lastName, birthDate, address, phoneNumber } = req.body;
         const newUser = { id, firstName, lastName, birthDate, address, phoneNumber };
-        users.set(id as string, newUser); // Simulate user creation
+        users.set(id as string, newUser); 
         res.status(201).json(newUser);
     } else if (req.method === 'PUT') {
         const user = users.get(id as string);

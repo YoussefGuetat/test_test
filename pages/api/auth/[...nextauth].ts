@@ -1,5 +1,3 @@
-// pages/api/auth/[...nextauth].ts
-
 import NextAuth from 'next-auth';
 import GoogleProvider from 'next-auth/providers/google';
 
@@ -11,30 +9,31 @@ export default NextAuth({
             
         }),
     ],
+    secret: process.env.NEXTAUTH_SECRET,
     callbacks: {
         async jwt({ token, user }) {
-            // Ensure the user object has the expected properties
+        
             if (user) {
-                token.email = user.email || null; // Ensure this is not undefined
-                token.id = user.id || "";         // Provide a default empty string
+                token.email = user.email || null; 
+                token.id = user.id || "";       
             }
             return token;
         },
         async session({ session, token }) {
-            // Ensure that session.user is initialized
             session.user = {
-                id: token.id as string || "", // Cast to string to ensure type
-                email: token.email || null, // Attach email, can be null
-                name: null,         // Set name if available
-                image: null,        // Set image if available
+                id: token.id as string || "", 
+                email: token.email || null, 
+                name: token.name,  
+                image: null,
             };
             return session;
         },
         async redirect({ url, baseUrl }) {
-            return baseUrl + '/profile'; // Redirect to profile page after login
+            return baseUrl + '/profile'; 
         },
     },
     session: {
         strategy: 'jwt',
     },
+    
 });
