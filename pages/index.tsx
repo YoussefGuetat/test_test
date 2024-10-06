@@ -1,15 +1,15 @@
 import Head from "next/head";
 import Script from "next/script";
 import { useEffect } from "react";
+import $ from "jquery"; // Import jQuery directly
 import 'owl.carousel/dist/assets/owl.carousel.css';
-import 'owl.carousel/dist/assets/owl.theme.default.css'; 
+import 'owl.carousel/dist/assets/owl.theme.default.css';
+import Link from 'next/link'; // Import Link from next/link
 
 const Home = () => {
   useEffect(() => {
     if (typeof window !== "undefined") {
-      const $ = require("jquery");
-      require("owl.carousel");
-
+      // Check if jQuery is loaded
       $(document).ready(function () {
         if (typeof $.fn.owlCarousel === "function") {
           $(".owl-carousel").owlCarousel({
@@ -27,7 +27,7 @@ const Home = () => {
 
   const handleRedirect = (e: React.MouseEvent) => {
     e.preventDefault();
-    window.location.href = "/sign-in";
+    window.location.href = "/sign-in"; // Not used since we will replace with Link
   };
 
   return (
@@ -37,27 +37,13 @@ const Home = () => {
         <meta charSet="utf-8" />
         <meta httpEquiv="X-UA-Compatible" content="IE=edge" />
         <meta name="viewport" content="width=device-width, initial-scale=1" />
-
-        {/* Font Family */}
         <link
-          href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900&amp;subset=devanagari,latin-ext"
+          href="https://fonts.googleapis.com/css?family=Poppins:100,200,300,400,500,600,700,800,900"
           rel="stylesheet"
         />
-
-        {/* Title of Site */}
-        <title>Browny</title>
-
-        {/* Favicon */}
-        <link rel="shortcut icon" type="image/icon" href="logo/favicon.png" />
-
-        {/* CSS Files */}
-        <link rel="stylesheet" href="css/font-awesome.min.css" />
-        <link rel="stylesheet" href="css/flaticon.css" />
-        <link rel="stylesheet" href="css/animate.css" />
-        <link rel="stylesheet" href="css/bootstrap.min.css" />
-        <link rel="stylesheet" href="css/bootsnav.css" />
-        <link rel="stylesheet" href="css/style.css" />
-        <link rel="stylesheet" href="css/responsive.css" />
+        <link rel="stylesheet" href="/css/font-awesome.min.css" />
+        <link rel="stylesheet" href="/css/bootstrap.min.css" />
+        <link rel="stylesheet" href="/css/style.css" />
       </Head>
 
       {/* Top Area */}
@@ -74,16 +60,15 @@ const Home = () => {
                 >
                   <i className="fa fa-bars"></i>
                 </button>
-                <a className="navbar-brand" href="/">
-                  Test Youssef
-                </a>
+                <Link href="/" className="navbar-brand">Test Youssef</Link>
+
               </div>
               <div className="collapse navbar-collapse menu-ui-design" id="navbar-menu">
                 <ul className="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
                   <li className="smooth-menu">
-                    <a href="/sign-in" onClick={handleRedirect}>
+                    <Link href="/sign-in">
                       Se connecter
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -103,9 +88,9 @@ const Home = () => {
                   Bonjour <span>,</span> Je suis <br /> GUETAT Youssef <br /> Vas-y{" "}
                   <span>.</span>
                 </h2>
-                <a href="/sign-in" onClick={handleRedirect}>
+                <Link href="/sign-in">
                   Se connecter
-                </a>
+                </Link>
               </div>
             </div>
           </div>
@@ -129,23 +114,17 @@ const Home = () => {
         </div>
       </footer>
 
-      {/* Load Scripts */}
-      <Script src="/js/jquery.js" strategy="beforeInteractive" />
-      <Script
-        src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js"
-        strategy="afterInteractive"
-      />
-      <Script src="/js/bootstrap.min.js" strategy="afterInteractive" />
-      <Script src="/js/bootsnav.js" strategy="afterInteractive" />
-      <Script src="/js/jquery.sticky.js" strategy="afterInteractive" />
-      <Script src="/js/progressbar.js" strategy="afterInteractive" />
-      <Script src="/js/jquery.appear.js" strategy="afterInteractive" />
-      <Script src="/js/owl.carousel.min.js" strategy="afterInteractive" />
-      <Script
-        src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js"
-        strategy="afterInteractive"
-      />
-      <Script src="/js/custom.js" strategy="afterInteractive" />
+     {/* Load Scripts */}
+<Script src="/js/jquery.js" strategy="beforeInteractive" />
+<Script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" strategy="afterInteractive" />
+<Script src="/js/bootstrap.min.js" strategy="afterInteractive" />
+<Script src="/js/bootsnav.js" strategy="afterInteractive" />
+<Script src="/js/jquery.sticky.js" strategy="afterInteractive" />
+<Script src="/js/progressbar.js" strategy="afterInteractive" />
+<Script src="/js/jquery.appear.js" strategy="afterInteractive" />
+<Script src="/js/owl.carousel.min.js" strategy="afterInteractive" />
+<Script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" strategy="afterInteractive" />
+
     </>
   );
 };

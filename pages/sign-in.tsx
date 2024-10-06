@@ -2,14 +2,26 @@ import { signIn } from 'next-auth/react';
 import Head from 'next/head';
 import Script from 'next/script';
 import { useEffect } from 'react';
+import Link from 'next/link';
+import dynamic from 'next/dynamic';
+
+// Dynamically import jQuery
+const jQuery = dynamic(() => import('jquery'), { ssr: false });
 
 const SignIn = () => {
     useEffect(() => {
-        const $ = require('jquery');
+        const loadJQuery = async () => {
+            // Explicitly define the type of $
+            const $ = (await jQuery) as typeof import('jquery');
 
-        if ($ && $.fn.sticky) {
-            $(".navbar").sticky(); 
-        }
+            const navbar = $(".navbar") as JQuery & { sticky: (options?: any) => JQuery };
+
+            if (navbar.length && typeof navbar.sticky === 'function') {
+                navbar.sticky(); 
+            }
+        };
+
+        loadJQuery();
     }, []);
 
     return (
@@ -27,38 +39,38 @@ const SignIn = () => {
                         display: flex;
                         justify-content: center;
                         align-items: center;
-                        min-height: 100vh; /* Full height */
-                        background-color: #f8f9fa; /* Light background color */
+                        min-height: 100vh;
+                        background-color: #f8f9fa;
                     }
                     .header-text {
                         text-align: center;
-                        background-color: #ffffff; /* White background for card */
-                        padding: 20px; /* Reduced padding */
-                        border-radius: 10px; /* Rounded corners */
-                        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1); /* Subtle shadow */
-                        width: 400px; /* Fixed width for the button container */
+                        background-color: #ffffff;
+                        padding: 20px;
+                        border-radius: 10px;
+                        box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+                        width: 400px;
                         position: relative;
                         left: 35%;
                         top: -150px;
                     }
                     .btn-google {
-                        background-color: #4285f4; /* Google blue */
+                        background-color: #4285f4;
                         color: white;
                         padding: 10px 20px;
                         border: none;
-                        border-radius: 5px; /* Rounded corners */
+                        border-radius: 5px;
                         cursor: pointer;
-                        transition: background-color 0.3s ease; /* Smooth transition */
-                        font-size: 16px; /* Font size */
-                        width: 100%; /* Full width */
+                        transition: background-color 0.3s ease;
+                        font-size: 16px;
+                        width: 100%;
                     }
                     .btn-google:hover {
-                        background-color: #357ae8; /* Darker blue on hover */
+                        background-color: #357ae8;
                     }
-                        .header-text h2 {
-    color: #000;}
-    .header-text p {
-    color: #000;}
+                    .header-text h2,
+                    .header-text p {
+                        color: #000;
+                    }
                 `}</style>
             </Head>
 
@@ -70,18 +82,22 @@ const SignIn = () => {
                                 <button type="button" className="navbar-toggle" data-toggle="collapse" data-target="#navbar-menu">
                                     <i className="fa fa-bars"></i>
                                 </button>
-                                <a className="navbar-brand" href="/">Test Youssef</a>
+                                <Link className="navbar-brand" href="/">Test Youssef</Link>
                             </div>
                             <div className="collapse navbar-collapse menu-ui-design" id="navbar-menu">
                                 <ul className="nav navbar-nav navbar-right" data-in="fadeInDown" data-out="fadeOutUp">
-                                    <li className="smooth-menu"><a href="/" onClick={(e) => {
-                                        e.preventDefault();
-                                        window.location.href = "/";
-                                    }}>Acceuil</a></li>
-                                    <li className="smooth-menu"><a href="/sign-in" onClick={(e) => {
-                                        e.preventDefault();
-                                        window.location.href = "/sign-in";
-                                    }}>Se connecter</a></li>
+                                    <li className="smooth-menu">
+                                        <Link href="/" onClick={(e) => {
+                                            e.preventDefault();
+                                            window.location.href = "/";
+                                        }}>Acceuil</Link>
+                                    </li>
+                                    <li className="smooth-menu">
+                                        <Link href="/sign-in" onClick={(e) => {
+                                            e.preventDefault();
+                                            window.location.href = "/sign-in";
+                                        }}>Se connecter</Link>
+                                    </li>
                                 </ul>
                             </div>
                         </div>
@@ -107,17 +123,24 @@ const SignIn = () => {
             <footer id="footer-copyright" className="footer-copyright">
                 <div className="container">
                     <div className="hm-footer-copyright text-center">
-                    <p>
-              &copy; copyright Guetat Youssef. design and developed by{" "}
-              <a href="https://www.linkedin.com/in/youssef-guetat-223535213/">Guetat Youssef</a>
-            </p>                    </div>
+                        <p>
+                            &copy; copyright Guetat Youssef. design and developed by{" "}
+                            <Link href="https://www.linkedin.com/in/youssef-guetat-223535213/">Guetat Youssef</Link>
+                        </p>
+                    </div>
                 </div>
             </footer>
 
             {/* Load Scripts */}
             <Script src="/js/jquery.js" strategy="beforeInteractive" />
             <Script src="/js/jquery.sticky.js" strategy="afterInteractive" />
+            <Script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" strategy="afterInteractive" />
             <Script src="/js/bootstrap.min.js" strategy="afterInteractive" />
+            <Script src="/js/bootsnav.js" strategy="afterInteractive" />
+            <Script src="/js/progressbar.js" strategy="afterInteractive" />
+            <Script src="/js/jquery.appear.js" strategy="afterInteractive" />
+            <Script src="/js/owl.carousel.min.js" strategy="afterInteractive" />
+            <Script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" strategy="afterInteractive" />
         </>
     );
 };

@@ -1,6 +1,9 @@
 {
   "compilerOptions": {
+    "baseUrl": ".",
+    "types": ["jquery", "owl.carousel"], 
     "lib": ["dom", "dom.iterable", "esnext"],
+    "typeRoots": ["./node_modules/@types", "./types", "./@types"],
     "allowJs": true,
     "skipLibCheck": true,
     "strict": true,
@@ -21,9 +24,14 @@
       "@/*": ["./src/*"]
     }
   },
-  
-    "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", "types/**/*.d.ts"],
-    "exclude": ["node_modules"]
-  
-  
+  "include": [
+    "next-env.d.ts", 
+    "**/*.ts", 
+    "**/*.tsx", 
+    "types/**/*.d.ts", 
+    "@types" , // Ensure @types is included
+    "@types/**/*.d.ts" 
+
+  ],
+  "exclude": ["node_modules"]
 }

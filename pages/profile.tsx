@@ -2,6 +2,8 @@ import { useSession, signOut } from "next-auth/react";
 import UserForm from "../src/presentation/UserForm";
 import Head from "next/head";
 import Script from "next/script";
+import Link from 'next/link'; // Import Link from next/link
+
 
 const Profile = () => {
   const { data: session } = useSession();
@@ -44,9 +46,9 @@ const Profile = () => {
                 >
                   <i className="fa fa-bars"></i>
                 </button>
-                <a className="navbar-brand" href="/">
+                <Link className="navbar-brand" href="/">
                   Test Youssef
-                </a>
+                </Link>
               </div>
               <div
                 className="collapse navbar-collapse menu-ui-design"
@@ -58,7 +60,7 @@ const Profile = () => {
                   data-out="fadeOutUp"
                 >
                   <li className="smooth-menu">
-                    <a
+                    <Link
                       href="#"
                       onClick={(e) => {
                         e.preventDefault();
@@ -67,7 +69,7 @@ const Profile = () => {
                       }}
                     >
                       Se Déconnecter
-                    </a>
+                    </Link>
                   </li>
                 </ul>
               </div>
@@ -117,29 +119,29 @@ const Profile = () => {
                   <div className="about-list-icon">
                     <ul>
                       <li>
-                        <a href="#">
+                        <Link href="#">
                           <i className="fa fa-facebook" aria-hidden="true"></i>
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a href="#">
+                        <Link href="#">
                           <i className="fa fa-dribbble" aria-hidden="true"></i>
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a href="#">
+                        <Link href="#">
                           <i className="fa fa-twitter" aria-hidden="true"></i>
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a href="#">
+                        <Link href="#">
                           <i className="fa fa-linkedin" aria-hidden="true"></i>
-                        </a>
+                        </Link>
                       </li>
                       <li>
-                        <a href="#">
+                        <Link href="#">
                           <i className="fa fa-instagram" aria-hidden="true"></i>
-                        </a>
+                        </Link>
                       </li>
                     </ul>
                   </div>
@@ -155,7 +157,7 @@ const Profile = () => {
           <div className="hm-footer-copyright text-center">
             <p>
               &copy; copyright Guetat Youssef. design and developed by{" "}
-              <a href="https://www.linkedin.com/in/youssef-guetat-223535213/">Guetat Youssef</a>
+              <Link href="https://www.linkedin.com/in/youssef-guetat-223535213/">Guetat Youssef</Link>
             </p>
           </div>
         </div>
@@ -163,9 +165,14 @@ const Profile = () => {
 
       {/* Load Scripts */}
       <Script src="/js/jquery.js" strategy="beforeInteractive" />
-      <Script src="/js/jquery.sticky.js" strategy="afterInteractive" />
-      <Script src="/js/bootstrap.min.js" strategy="afterInteractive" />
-      <Script src="/js/custom.js" strategy="afterInteractive" />
+<Script src="https://cdnjs.cloudflare.com/ajax/libs/modernizr/2.8.3/modernizr.min.js" strategy="afterInteractive" />
+<Script src="/js/bootstrap.min.js" strategy="afterInteractive" />
+<Script src="/js/bootsnav.js" strategy="afterInteractive" />
+<Script src="/js/jquery.sticky.js" strategy="afterInteractive" />
+<Script src="/js/progressbar.js" strategy="afterInteractive" />
+<Script src="/js/jquery.appear.js" strategy="afterInteractive" />
+<Script src="/js/owl.carousel.min.js" strategy="afterInteractive" />
+<Script src="https://cdnjs.cloudflare.com/ajax/libs/jquery-easing/1.4.1/jquery.easing.min.js" strategy="afterInteractive" />
     </>
   );
 };
